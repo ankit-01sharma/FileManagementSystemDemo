@@ -94,13 +94,13 @@ public class FileOperationsServiceImpl implements FileOperationsService {
 	@Override
 	public ExcelFile checkProgressOfFile(Long fileId){
 		return fileOperationsRepo.findById(fileId)
-				.orElseThrow(()->{throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "ExcelFile not Uploaded");});
+				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "ExcelFile not Uploaded"));
 	}
 	
 	@Override
 	public String reviewRecordsOfFile(Long fileId) {
 		ExcelFile excelFile= fileOperationsRepo.findById(fileId)
-				.orElseThrow(()->{throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "ExcelFile not found");});
+				.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND, "ExcelFile not found"));
 		excelFile.setLastAccessedOn(new Date(System.currentTimeMillis()));
 		fileOperationsRepo.save(excelFile);
 		List<String> content = new ArrayList<>();
